@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>720</height>
+    <height>770</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1797,7 +1797,7 @@ p, li { white-space: pre-wrap; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>1</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="acceptDrops">
@@ -1951,15 +1951,16 @@ color:white;
                                </layout>
                               </widget>
                              </item>
-                             <item>
+                             <item alignment="Qt::AlignLeft">
                               <widget class="QLabel" name="label">
                                <property name="styleSheet">
                                 <string notr="true">QLabel {
-    font-size: 14px; /* Text size */
-	font: 75 14pt &quot;Calibri&quot;;
+    font: 75 14pt &quot;Calibri&quot;;
     font-weight: bold; /* Make the text bold */
+    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */
     padding: 8px; /* Padding inside the QLabel */
     text-align: center; /* Center-align the text */
+padding-left:0px;
 }
 </string>
                                </property>
@@ -2044,6 +2045,315 @@ background-color:rgb(200, 167, 249);
                               </widget>
                              </item>
                             </layout>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="page">
+                      <layout class="QVBoxLayout" name="verticalLayout_17">
+                       <item>
+                        <widget class="QFrame" name="frame_4">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_22">
+                          <property name="leftMargin">
+                           <number>11</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QFrame" name="frame_5">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_16">
+                             <property name="spacing">
+                              <number>12</number>
+                             </property>
+                             <item alignment="Qt::AlignHCenter">
+                              <widget class="QFrame" name="frame_6">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QPushButton" name="btnJobDes_2">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>180</width>
+                                    <height>40</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Calibri</family>
+                                    <pointsize>12</pointsize>
+                                    <weight>50</weight>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>PointingHandCursor</cursorShape>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">
+
+
+#btnJobDes_2{
+background-color: rgb(52, 59, 72);
+color:white;
+}
+</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>1. The Job</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="btnResumes_2">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>180</width>
+                                    <height>40</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Calibri</family>
+                                    <pointsize>12</pointsize>
+                                    <weight>50</weight>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>PointingHandCursor</cursorShape>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">
+#btnResumes_2{
+background-color:rgb(189, 147, 249);
+color:white;
+}
+</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>2. Resumes</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_8">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>100</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item alignment="Qt::AlignLeft">
+                                 <widget class="QLabel" name="label_2">
+                                  <property name="styleSheet">
+                                   <string notr="true">QLabel {
+    font: 75 14pt &quot;Calibri&quot;;
+    font-weight: bold; /* Make the text bold */
+    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */
+    padding: 8px; /* Padding inside the QLabel */
+    text-align: center; /* Center-align the text */
+padding-left:0px;
+}
+</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>2. Upload your resumes</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_7">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>425</height>
+                                </size>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">    border: 2px dashed rgb(189, 147, 249);
+</string>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_18">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QPushButton" name="btnUpload">
+                                  <property name="sizePolicy">
+                                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                   </sizepolicy>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>SizeVerCursor</cursorShape>
+                                  </property>
+                                  <property name="acceptDrops">
+                                   <bool>true</bool>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">QPushButton {
+    background-color: rgb(52, 59, 72); /* Dark gray background color */
+    background-image: url(:/icons/images/icons/icons8-upload-via-bowser-100.png); /* Icon image */
+    background-position: center; /* Center the icon */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-size: contain; /* Scale the image to fit the button */
+    border: none; /* No border */
+    padding-top: 170px; /* Space inside the button */
+    color: white; /* Text color */
+    font-weight: bold; /* Bold text */
+    text-align: center; /* Center text */
+}
+</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>Click the button above or drop your resume in here!
+English resumes in PDF,DOCX and TXT.</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="btnAnalyze">
+                            <property name="minimumSize">
+                             <size>
+                              <width>160</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Calibri</family>
+                              <pointsize>12</pointsize>
+                              <weight>50</weight>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="cursor">
+                             <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
+                            <property name="layoutDirection">
+                             <enum>Qt::LeftToRight</enum>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">
+#btnAnalyze{
+background-color:rgb(189, 147, 249);
+color:white;
+}
+#btnAnalyze:hover {
+background-color:rgb(200, 167, 249);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string>Analyze</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="resources.qrc">
+                              <normaloff>:/icons/images/icons/cil-input.png</normaloff>:/icons/images/icons/cil-input.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>25</width>
+                              <height>25</height>
+                             </size>
+                            </property>
                            </widget>
                           </item>
                          </layout>
