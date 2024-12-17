@@ -1234,6 +1234,14 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_9.addWidget(self.label_2, 0, QtCore.Qt.AlignLeft)
         self.verticalLayout_16.addWidget(self.frame_8)
+        self.lbFilesSelected = QtWidgets.QLabel(self.frame_5)
+        self.lbFilesSelected.setStyleSheet("    font: 75 12pt \"Calibri\";\n"
+"    font-weight: bold; /* Make the text bold */\n"
+"color:rgb(189, 147, 249); /* Bottom border with color */")
+        self.lbFilesSelected.setText("")
+        self.lbFilesSelected.setAlignment(QtCore.Qt.AlignCenter)
+        self.lbFilesSelected.setObjectName("lbFilesSelected")
+        self.verticalLayout_16.addWidget(self.lbFilesSelected)
         self.frame_7 = QtWidgets.QFrame(self.frame_5)
         self.frame_7.setMinimumSize(QtCore.QSize(0, 425))
         self.frame_7.setStyleSheet("    border: 2px dashed rgb(189, 147, 249);\n"
@@ -1433,7 +1441,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.styleSheet)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1476,7 +1484,7 @@ class Ui_MainWindow(object):
         self.btnResumes_2.setText(_translate("MainWindow", "2. Resumes"))
         self.label_2.setText(_translate("MainWindow", "2. Upload your resumes"))
         self.btnUpload.setText(_translate("MainWindow", "Click the button above or drop your resume in here!\n"
-"English resumes in PDF,DOCX and TXT."))
+"English resumes in PDF, DOCX and TXT."))
         self.btnAnalyze.setText(_translate("MainWindow", "Analyze"))
         self.btn_message.setText(_translate("MainWindow", "Message"))
         self.btn_print.setText(_translate("MainWindow", "Print"))

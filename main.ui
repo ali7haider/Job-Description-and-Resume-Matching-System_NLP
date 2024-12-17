@@ -2241,6 +2241,21 @@ padding-left:0px;
                               </widget>
                              </item>
                              <item>
+                              <widget class="QLabel" name="lbFilesSelected">
+                               <property name="styleSheet">
+                                <string notr="true">    font: 75 12pt &quot;Calibri&quot;;
+    font-weight: bold; /* Make the text bold */
+color:rgb(189, 147, 249); /* Bottom border with color */</string>
+                               </property>
+                               <property name="text">
+                                <string/>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignCenter</set>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
                               <widget class="QFrame" name="frame_7">
                                <property name="minimumSize">
                                 <size>

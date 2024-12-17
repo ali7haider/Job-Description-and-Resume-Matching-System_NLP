@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QMessageBox,
     QMainWindow,
+    QFileDialog,
 )
 from PyQt5.QtWidgets import QApplication, QPushButton, QMessageBox, QMainWindow
 from PyQt5.QtWidgets import QApplication, QMainWindow,QPushButton
@@ -35,7 +36,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         UIFunctions.uiDefinitions(self)
 
         self.btnHome.setStyleSheet(UIFunctions.selectMenu(self.btnHome.styleSheet()))
-        self.btnNext.clicked.connect(self.handle_next_button_click)
+
 
         # Initialize individual pages
         self.init_pages()
@@ -46,6 +47,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Assign menu button clicks
         self.btnHome.clicked.connect(self.show_home_page)
+
+        self.btnNext.clicked.connect(self.handle_next_button_click)
+        self.btnUpload.clicked.connect(self.handle_upload_button_click)
+        self.btnAnalyze.clicked.connect(self.start_nlp_process)
+
 
         self.saved_job_description=''
 
@@ -77,9 +83,72 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             QMessageBox.critical(self, "Error", f"An unexpected error occurred: {str(e)}")
 
 
-    
+    def handle_upload_button_click(self):
+        try:
+            options = QFileDialog.Options()
+            options |= QFileDialog.ReadOnly
+            file_filter = "PDF Files (*.pdf);;DOCX Files (*.docx);;Text Files (*.txt)"
+            
+            files, _ = QFileDialog.getOpenFileNames(self, "Select Files", "", file_filter, options=options)
+            
+            if files:
+                # Save or process the selected files
+                self.process_selected_files(files)
+            else:
+                QMessageBox.warning(self, "Warning", "No files selected.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An unexpected error occurred: {str(e)}")
+
 
     
+
+    def process_selected_files(self, files):
+        """Handles processing of the selected files."""
+        self.selected_files_count = len(files)
+        self.lbFilesSelected.setText(f"Files Selected: {self.selected_files_count}")
+
+        for file_path in files:
+            if file_path.endswith('.pdf'):
+                text = self.extract_text_from_pdf(file_path)
+            elif file_path.endswith('.docx'):
+                text = self.extract_text_from_docx(file_path)
+            elif file_path.endswith('.txt'):
+                text = self.extract_text_from_txt(file_path)
+            else:
+                print(f"Unsupported file type: {file_path}")
+                continue
+
+            self.saved_resumes[file_path] = text
+    def start_nlp_process(self):
+        """Starts the NLP process on the selected resumes."""
+        if not self.saved_resumes:
+            QMessageBox.warning(self, "Warning", "No files selected to analyze.")
+        else:
+            # Placeholder for NLP processing logic
+            self.analyze_resumes_for_nlp()
+
+    def analyze_resumes_for_nlp(self):
+        """Analyzes the resumes for the most similar ones based on the job description."""
+        # Implement the actual NLP logic here
+        print("Analyzing resumes for NLP...")
+
+        # Example NLP processing (replace with actual NLP logic)
+        results = self.compare_resumes_with_job_description(self.saved_resumes)
+        self.display_nlp_results(results)
+
+    def compare_resumes_with_job_description(self, resumes):
+        """Compares resumes against the job description and returns the most similar ones."""
+        # Placeholder function for comparing resumes to job description
+        # Example comparison logic (needs to be replaced with actual NLP techniques)
+        results = sorted(resumes.items(), key=lambda x: len(x[1]), reverse=True)  # Sorting by length as a placeholder
+        return results[:5]  # Return top 5 similar resumes
+
+    def display_nlp_results(self, results):
+        """Displays the NLP results (most similar resumes) in the UI."""
+        # Update UI with the most similar resumes
+        self.resultsList.clear()
+        for i, (file_path, text) in enumerate(results):
+            self.resultsList.addItem(f"{i+1}. {file_path} (Length: {len(text)} characters)")
 
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls():
