@@ -30,6 +30,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         from modules.ui_functions import UIFunctions
         self.set_buttons_cursor()
         self.ui=self
+        self.setAcceptDrops(True)
         
 
         self.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
@@ -54,6 +55,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
         self.saved_job_description=''
+        self.default_resume_count=3
+        self.saved_resumes={}
 
 
     def init_pages(self):
@@ -95,6 +98,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 # Save or process the selected files
                 self.process_selected_files(files)
             else:
+                self.lbFilesSelected.setText(f"Files Selected: 0")
+
                 QMessageBox.warning(self, "Warning", "No files selected.")
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An unexpected error occurred: {str(e)}")
@@ -106,35 +111,50 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """Handles processing of the selected files."""
         self.selected_files_count = len(files)
         self.lbFilesSelected.setText(f"Files Selected: {self.selected_files_count}")
-
+        self.saved_resumes={}
         for file_path in files:
-            if file_path.endswith('.pdf'):
-                text = self.extract_text_from_pdf(file_path)
-            elif file_path.endswith('.docx'):
-                text = self.extract_text_from_docx(file_path)
-            elif file_path.endswith('.txt'):
-                text = self.extract_text_from_txt(file_path)
-            else:
-                print(f"Unsupported file type: {file_path}")
-                continue
+            try:
+                if file_path.endswith('.pdf'):
+                    text = self.extract_text_from_pdf(file_path)
+                elif file_path.endswith('.docx'):
+                    text = self.extract_text_from_docx(file_path)
+                elif file_path.endswith('.txt'):
+                    text = self.extract_text_from_txt(file_path)
+                else:
+                    raise ValueError(f"Unsupported file type: {file_path}")
 
-            self.saved_resumes[file_path] = text
+                self.saved_resumes[file_path] = text
+
+            except Exception as e:
+                QMessageBox.warning(self, "Error", f"Failed to process file {file_path}: {str(e)}")
+                print(f"Error processing file {file_path}: {str(e)}")
     def start_nlp_process(self):
         """Starts the NLP process on the selected resumes."""
+        print(len(self.saved_resumes))
         if not self.saved_resumes:
             QMessageBox.warning(self, "Warning", "No files selected to analyze.")
-        else:
-            # Placeholder for NLP processing logic
-            self.analyze_resumes_for_nlp()
+            return
+
+        try:
+            txtNoResumes = self.txtNoResumes.text().strip()  # Assume txtNoResumes is a QTextEdit or QLineEdit
+            num_resumes = int(txtNoResumes) if txtNoResumes else self.default_resume_count
+
+            if len(self.saved_resumes) < num_resumes:
+                QMessageBox.warning(self, "Warning", f"Not enough resumes uploaded. At least {num_resumes} resumes are required.")
+            else:
+                # Proceed with NLP processing
+                self.analyze_resumes_for_nlp()
+        except ValueError:
+            QMessageBox.warning(self, "Error", "Invalid number entered for minimum resumes. Please enter a valid integer.")
 
     def analyze_resumes_for_nlp(self):
         """Analyzes the resumes for the most similar ones based on the job description."""
         # Implement the actual NLP logic here
         print("Analyzing resumes for NLP...")
 
-        # Example NLP processing (replace with actual NLP logic)
-        results = self.compare_resumes_with_job_description(self.saved_resumes)
-        self.display_nlp_results(results)
+        # # Example NLP processing (replace with actual NLP logic)
+        # results = self.compare_resumes_with_job_description(self.saved_resumes)
+        # self.display_nlp_results(results)
 
     def compare_resumes_with_job_description(self, resumes):
         """Compares resumes against the job description and returns the most similar ones."""
@@ -167,52 +187,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 file_paths.append(file_path)
 
         if file_paths:
-            self.handle_multiple_files_drop(file_paths)
-
-
-    def handle_multiple_files_drop(self, file_paths):
-        """Handles multiple file drops."""
-        for file_path in file_paths:
-            if file_path.endswith('.pdf'):
-                text = self.extract_text_from_pdf(file_path)
-                # Do something with the extracted text, e.g., display or store it
-            elif file_path.endswith('.docx'):
-                text = self.extract_text_from_docx(file_path)
-                # Do something with the extracted text
-            elif file_path.endswith('.txt'):
-                text = self.extract_text_from_txt(file_path)
-                # Do something with the extracted text
-            else:
-                print(f"Unsupported file type: {file_path}")
-
-    def process_directory(self, directory):
-        """Handles directory processing to locate .cs, .pdf, .txt, and .docx files."""
-        files_found = {'pdf': None, 'docx': None, 'txt': None}
-        
-        for root, dirs, files in os.walk(directory):
-            for file in files:
-                if file.endswith('.pdf'):
-                    files_found['pdf'] = os.path.join(root, file)
-                elif file.endswith('.docx'):
-                    files_found['docx'] = os.path.join(root, file)
-                elif file.endswith('.txt'):
-                    files_found['txt'] = os.path.join(root, file)
-                    
-            if all(files_found.values()):
-                break
-
-        # Process each file if found
-        for file_type, file_path in files_found.items():
-            if file_path:
-                if file_type == 'pdf':
-                    text = self.extract_text_from_pdf(file_path)
-                    # Do something with the extracted text
-                elif file_type == 'docx':
-                    text = self.extract_text_from_docx(file_path)
-                    # Do something with the extracted text
-                elif file_type == 'txt':
-                    text = self.extract_text_from_txt(file_path)
-                    # Do something with the extracted text
+            self.process_selected_files(file_paths)
     def extract_text_from_docx(self,file_path):
         return docx2txt.process(file_path)
 

@@ -1234,16 +1234,39 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_9.addWidget(self.label_2, 0, QtCore.Qt.AlignLeft)
         self.verticalLayout_16.addWidget(self.frame_8)
+        self.frame_9 = QtWidgets.QFrame(self.frame_5)
+        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_9.setObjectName("frame_9")
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_9)
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+        self.label_3 = QtWidgets.QLabel(self.frame_9)
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout_10.addWidget(self.label_3)
+        self.txtNoResumes = QtWidgets.QLineEdit(self.frame_9)
+        self.txtNoResumes.setMinimumSize(QtCore.QSize(250, 30))
+        self.txtNoResumes.setStyleSheet("#txtNoResumes {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    color: rgb(0, 0, 0);\n"
+"    border: 1px solid transparent;  /* Initially, set a transparent border */\n"
+"}\n"
+"\n"
+"#txtNoResumes:focus {\n"
+"    border: 2px solid rgb(200, 167, 249); /* Change the border color when the button is focused/clicked */\n"
+"}")
+        self.txtNoResumes.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
+        self.txtNoResumes.setObjectName("txtNoResumes")
+        self.horizontalLayout_10.addWidget(self.txtNoResumes)
+        self.verticalLayout_16.addWidget(self.frame_9, 0, QtCore.Qt.AlignLeft)
         self.lbFilesSelected = QtWidgets.QLabel(self.frame_5)
-        self.lbFilesSelected.setStyleSheet("    font: 75 12pt \"Calibri\";\n"
+        self.lbFilesSelected.setStyleSheet("    font: 75 11pt \"Calibri\";\n"
 "    font-weight: bold; /* Make the text bold */\n"
 "color:rgb(189, 147, 249); /* Bottom border with color */")
-        self.lbFilesSelected.setText("")
         self.lbFilesSelected.setAlignment(QtCore.Qt.AlignCenter)
         self.lbFilesSelected.setObjectName("lbFilesSelected")
         self.verticalLayout_16.addWidget(self.lbFilesSelected)
         self.frame_7 = QtWidgets.QFrame(self.frame_5)
-        self.frame_7.setMinimumSize(QtCore.QSize(0, 425))
+        self.frame_7.setMinimumSize(QtCore.QSize(0, 350))
         self.frame_7.setStyleSheet("    border: 2px dashed rgb(189, 147, 249);\n"
 "")
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -1483,6 +1506,9 @@ class Ui_MainWindow(object):
         self.btnJobDes_2.setText(_translate("MainWindow", "1. The Job"))
         self.btnResumes_2.setText(_translate("MainWindow", "2. Resumes"))
         self.label_2.setText(_translate("MainWindow", "2. Upload your resumes"))
+        self.label_3.setText(_translate("MainWindow", "Requires Resumes"))
+        self.txtNoResumes.setPlaceholderText(_translate("MainWindow", "Default would be 3"))
+        self.lbFilesSelected.setText(_translate("MainWindow", "Files Selected: 0"))
         self.btnUpload.setText(_translate("MainWindow", "Click the button above or drop your resume in here!\n"
 "English resumes in PDF, DOCX and TXT."))
         self.btnAnalyze.setText(_translate("MainWindow", "Analyze"))

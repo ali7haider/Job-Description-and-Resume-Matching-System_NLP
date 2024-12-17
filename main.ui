@@ -2289,12 +2289,12 @@ padding-left:0px;
                              <item>
                               <widget class="QLabel" name="lbFilesSelected">
                                <property name="styleSheet">
-                                <string notr="true">    font: 75 12pt &quot;Calibri&quot;;
+                                <string notr="true">    font: 75 11pt &quot;Calibri&quot;;
     font-weight: bold; /* Make the text bold */
 color:rgb(189, 147, 249); /* Bottom border with color */</string>
                                </property>
                                <property name="text">
-                                <string/>
+                                <string>Files Selected: 0</string>
                                </property>
                                <property name="alignment">
                                 <set>Qt::AlignCenter</set>
