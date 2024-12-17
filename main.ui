@@ -2240,6 +2240,52 @@ padding-left:0px;
                                </layout>
                               </widget>
                              </item>
+                             <item alignment="Qt::AlignLeft">
+                              <widget class="QFrame" name="frame_9">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                                <item>
+                                 <widget class="QLabel" name="label_3">
+                                  <property name="text">
+                                   <string>Requires Resumes</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QLineEdit" name="txtNoResumes">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>250</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">#txtNoResumes {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 1px solid transparent;  /* Initially, set a transparent border */
+}
+
+#txtNoResumes:focus {
+    border: 2px solid rgb(200, 167, 249); /* Change the border color when the button is focused/clicked */
+}</string>
+                                  </property>
+                                  <property name="inputMethodHints">
+                                   <set>Qt::ImhDigitsOnly</set>
+                                  </property>
+                                  <property name="placeholderText">
+                                   <string>Default would be 3</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
                              <item>
                               <widget class="QLabel" name="lbFilesSelected">
                                <property name="styleSheet">
@@ -2260,7 +2306,7 @@ color:rgb(189, 147, 249); /* Bottom border with color */</string>
                                <property name="minimumSize">
                                 <size>
                                  <width>0</width>
-                                 <height>425</height>
+                                 <height>350</height>
                                 </size>
                                </property>
                                <property name="styleSheet">
