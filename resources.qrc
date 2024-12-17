@@ -6,6 +6,7 @@
   </qresource>
   <qresource prefix="icons">
     <file>images/icons/icons8-tool-20.png</file>
+    <file>images/icons/icons8-upload-to-cloud-100.png</file>
     <file>images/icons/cil-3d.png</file>
     <file>images/icons/icons8-upload-via-bowser-100.png</file>
     <file>images/icons/icons8-adjustment-20.png</file>
