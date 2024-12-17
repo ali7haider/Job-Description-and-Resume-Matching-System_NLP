@@ -27,18 +27,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Set up the user interface from the generated class
         self.setupUi(self)
         from modules.ui_functions import UIFunctions
-        self.ui=self
-        self.setAcceptDrops(True)
         self.set_buttons_cursor()
+        self.ui=self
         
 
         self.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
         UIFunctions.uiDefinitions(self)
 
         self.btnHome.setStyleSheet(UIFunctions.selectMenu(self.btnHome.styleSheet()))
+        self.btnNext.clicked.connect(self.handle_next_button_click)
 
-        # Access the QStackedWidget
-        self.stacked_widget = self.findChild(QStackedWidget, "stackedWidget")  # Match the object name in Qt Designer
         # Initialize individual pages
         self.init_pages()
 
@@ -49,6 +47,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Assign menu button clicks
         self.btnHome.clicked.connect(self.show_home_page)
 
+        self.saved_job_description=''
+
 
     def init_pages(self):
         """Initialize backend logic for each page."""
@@ -58,6 +58,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def show_home_page(self):
         self.handleMenuClick(self.btnHome, 0)
+    
+    
+    def handle_next_button_click(self):
+        try:
+            job_description_text = self.jobDescription.toPlainText()
+
+            # Check the length of the job description
+            word_count = len(job_description_text.split())
+            if word_count < 30 or word_count > 2500:
+                QMessageBox.warning(self, "Error", "The job description you entered is too short. Please make sure you paste in a job description that's at least 30 words and a maximum of 2500 words.")
+            else:
+                # Save the text if conditions are satisfied
+                self.saved_job_description = job_description_text
+                # Switch to the next stack widget page
+                self.stackedWidget.setCurrentIndex(1)  # Assuming page 2 is index 1
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An unexpected error occurred: {str(e)}")
+
 
     
 

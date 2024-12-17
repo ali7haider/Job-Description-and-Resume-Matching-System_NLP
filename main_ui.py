@@ -1058,13 +1058,15 @@ class Ui_MainWindow(object):
         font.setItalic(False)
         font.setWeight(50)
         self.btnJobDes.setFont(font)
-        self.btnJobDes.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnJobDes.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.btnJobDes.setStyleSheet("\n"
 "#btnJobDes{\n"
 "background-color:rgb(189, 147, 249);\n"
 "color:white;\n"
 "}\n"
-"")
+"#btnJobDes:hover{\n"
+"border:none;\n"
+"}")
         self.btnJobDes.setObjectName("btnJobDes")
         self.horizontalLayout_7.addWidget(self.btnJobDes)
         self.btnResumes = QtWidgets.QPushButton(self.frame_2)
@@ -1076,13 +1078,15 @@ class Ui_MainWindow(object):
         font.setItalic(False)
         font.setWeight(50)
         self.btnResumes.setFont(font)
-        self.btnResumes.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnResumes.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.btnResumes.setStyleSheet("\n"
 "#btnResumes{\n"
 "background-color: rgb(52, 59, 72);\n"
 "color:white;\n"
 "}\n"
-"")
+"#btnResumes:hover{\n"
+"border:none;\n"
+"}")
         self.btnResumes.setObjectName("btnResumes")
         self.horizontalLayout_7.addWidget(self.btnResumes)
         self.verticalLayout.addWidget(self.frame_2, 0, QtCore.Qt.AlignHCenter)
@@ -1098,8 +1102,8 @@ class Ui_MainWindow(object):
 "")
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label, 0, QtCore.Qt.AlignLeft)
-        self.textEdit_2 = QtWidgets.QTextEdit(self.frame_3)
-        self.textEdit_2.setStyleSheet("QTextEdit {\n"
+        self.jobDescription = QtWidgets.QTextEdit(self.frame_3)
+        self.jobDescription.setStyleSheet("QTextEdit {\n"
 "    background-color: rgb(33, 37, 43);\n"
 "    color: #fff;\n"
 "    border-radius: 8px;\n"
@@ -1111,10 +1115,10 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 " QTextEdit:focus { border: 2px solid rgb(189, 147, 249);}")
-        self.textEdit_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.textEdit_2.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.textEdit_2.setObjectName("textEdit_2")
-        self.verticalLayout.addWidget(self.textEdit_2)
+        self.jobDescription.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.jobDescription.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.jobDescription.setObjectName("jobDescription")
+        self.verticalLayout.addWidget(self.jobDescription)
         self.btnNext = QtWidgets.QPushButton(self.frame_3)
         self.btnNext.setMinimumSize(QtCore.QSize(160, 45))
         font = QtGui.QFont()
@@ -1466,7 +1470,7 @@ class Ui_MainWindow(object):
         self.btnJobDes.setText(_translate("MainWindow", "1. The Job"))
         self.btnResumes.setText(_translate("MainWindow", "2. Resumes"))
         self.label.setText(_translate("MainWindow", "1. Paste your job description"))
-        self.textEdit_2.setPlaceholderText(_translate("MainWindow", "Paste the job description in here so we can analyze its skills."))
+        self.jobDescription.setPlaceholderText(_translate("MainWindow", "Paste the job description in here so we can analyze its skills."))
         self.btnNext.setText(_translate("MainWindow", "Next"))
         self.btnJobDes_2.setText(_translate("MainWindow", "1. The Job"))
         self.btnResumes_2.setText(_translate("MainWindow", "2. Resumes"))
