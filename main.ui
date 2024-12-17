@@ -1970,7 +1970,7 @@ padding-left:0px;
                               </widget>
                              </item>
                              <item>
-                              <widget class="QTextEdit" name="textEdit_2">
+                              <widget class="QTextEdit" name="jobDescription">
                                <property name="styleSheet">
                                 <string notr="true">QTextEdit {
     background-color: rgb(33, 37, 43);
