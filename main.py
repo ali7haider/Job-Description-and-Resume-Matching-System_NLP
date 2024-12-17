@@ -1,6 +1,6 @@
 from flask import Flask,request,render_template
 import os
-import PyPdf2
+from PyPDF2 import PdfReader
 import docx2txt
 
 app=Flask(__name__)
@@ -14,7 +14,7 @@ def extract_text_from_docx(file_path):
 def extract_text_from_pdf(file_path):
     text = ""
     with open(file_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
+        reader = PdfReader(file)
         for page in reader.pages:
             text += page.extract_text()
     return text
@@ -31,8 +31,9 @@ def extract_text(file_path):
     else:
         return ""
 @app.route("/")
-def matchReume():
+def matchResume():
     return render_template('index.html')
+
 @app.route("/matcher",methods=['GET','POST'])
 def matcher():
     if request.method=='POST':
@@ -44,6 +45,8 @@ def matcher():
             filename=os.path.join(app.config['UPLOAD_FOLDER'],resume_file.filename)
             resume_file.save(filename)
             resumes.append(filename)
+    if not resumes or not job_description:
+            return render_template('index.html', message="Please upload resumes and enter a job description.")
 
 def matchReume():
     return render_template('index.html')
