@@ -1147,11 +1147,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_21.addWidget(self.frame_3)
         self.horizontalLayout_6.addWidget(self.frame)
         self.stackedWidget.addWidget(self.home)
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.page)
+        self.resumes = QtWidgets.QWidget()
+        self.resumes.setObjectName("resumes")
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.resumes)
         self.verticalLayout_17.setObjectName("verticalLayout_17")
-        self.frame_4 = QtWidgets.QFrame(self.page)
+        self.frame_4 = QtWidgets.QFrame(self.resumes)
         self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_4.setObjectName("frame_4")
@@ -1328,7 +1328,45 @@ class Ui_MainWindow(object):
         self.btnAnalyze.setObjectName("btnAnalyze")
         self.verticalLayout_22.addWidget(self.btnAnalyze, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayout_17.addWidget(self.frame_4)
-        self.stackedWidget.addWidget(self.page)
+        self.stackedWidget.addWidget(self.resumes)
+        self.result = QtWidgets.QWidget()
+        self.result.setObjectName("result")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.result)
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.frame_10 = QtWidgets.QFrame(self.result)
+        self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_10.setObjectName("frame_10")
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.frame_10)
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        self.frame_11 = QtWidgets.QFrame(self.frame_10)
+        self.frame_11.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_11.setObjectName("frame_11")
+        self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.frame_11)
+        self.verticalLayout_23.setObjectName("verticalLayout_23")
+        self.label_5 = QtWidgets.QLabel(self.frame_11)
+        self.label_5.setStyleSheet("QLabel {\n"
+"    font: 75 14pt \"Calibri\";\n"
+"    font-weight: bold; /* Make the text bold */\n"
+"    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */\n"
+"    padding: 8px; /* Padding inside the QLabel */\n"
+"    text-align: center; /* Center-align the text */\n"
+"padding-left:0px;\n"
+"}\n"
+"")
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.verticalLayout_23.addWidget(self.label_5)
+        self.verticalLayout_20.addWidget(self.frame_11, 0, QtCore.Qt.AlignHCenter)
+        self.frame_12 = QtWidgets.QFrame(self.frame_10)
+        self.frame_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_12.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_12.setObjectName("frame_12")
+        self.verticalLayout_20.addWidget(self.frame_12)
+        self.verticalLayout_19.addWidget(self.frame_10)
+        self.stackedWidget.addWidget(self.result)
         self.verticalLayout_15.addWidget(self.stackedWidget)
         self.horizontalLayout_4.addWidget(self.pagesContainer)
         self.extraRightBox = QtWidgets.QFrame(self.content)
@@ -1464,7 +1502,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.styleSheet)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1512,6 +1550,7 @@ class Ui_MainWindow(object):
         self.btnUpload.setText(_translate("MainWindow", "Click the button above or drop your resume in here!\n"
 "English resumes in PDF, DOCX and TXT."))
         self.btnAnalyze.setText(_translate("MainWindow", "Analyze"))
+        self.label_5.setText(_translate("MainWindow", "Loading...Please Wait"))
         self.btn_message.setText(_translate("MainWindow", "Message"))
         self.btn_print.setText(_translate("MainWindow", "Print"))
         self.btn_logout.setText(_translate("MainWindow", "Logout"))
