@@ -127,7 +127,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 print(f"Error processing file {file_path}: {str(e)}")
     def start_nlp_process(self):
         """Starts the NLP process on the selected resumes."""
-        print(len(self.saved_resumes))
         if not self.saved_resumes:
             QMessageBox.warning(self, "Warning", "No files selected to analyze.")
             return
