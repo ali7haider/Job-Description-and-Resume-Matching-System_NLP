@@ -1,7 +1,6 @@
 import sys
 import os
 from PyQt5.QtCore import Qt
-from xml.etree import ElementTree as ET
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -10,17 +9,15 @@ from PyQt5.QtWidgets import (
     QMainWindow,
     QFileDialog,
 )
-from PyQt5.QtWidgets import QApplication, QPushButton, QMessageBox, QMainWindow
-from PyQt5.QtWidgets import QApplication, QMainWindow,QPushButton
 import os
 import sys
-#from androguard.core.bytecodes.apk import APK
-from PyQt5.QtWidgets import QMainWindow, QPushButton,QStackedWidget
 import os
-from PyQt5 import uic
 from main_ui import Ui_MainWindow
 from PyPDF2 import PdfReader
 import docx2txt
+from text_processing import preprocess_text
+
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -143,14 +140,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 QMessageBox.warning(self, "Warning", f"Not enough resumes uploaded. At least {num_resumes} resumes are required.")
             else:
                 # Proceed with NLP processing
+                self.stackedWidget.setCurrentIndex(2)
                 self.analyze_resumes_for_nlp()
         except ValueError:
             QMessageBox.warning(self, "Error", "Invalid number entered for minimum resumes. Please enter a valid integer.")
 
     def analyze_resumes_for_nlp(self):
         """Analyzes the resumes for the most similar ones based on the job description."""
-        # Implement the actual NLP logic here
-        print("Analyzing resumes for NLP...")
+        if not self.saved_resumes:
+            QMessageBox.warning(self, "Warning", "No files selected to analyze.")
+            return
+        # Preprocess job description
+        job_desc_text = self.saved_job_description
+        preprocessed_job_desc = preprocess_text(job_desc_text)
+
+        # Preprocess each resume
+        preprocessed_resumes = {}
+        for file_path, text in self.saved_resumes.items():
+            preprocessed_resumes[file_path] = preprocess_text(text)
 
         # # Example NLP processing (replace with actual NLP logic)
         # results = self.compare_resumes_with_job_description(self.saved_resumes)
