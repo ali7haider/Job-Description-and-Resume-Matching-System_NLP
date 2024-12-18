@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import (
     QMessageBox,
     QMainWindow,
     QFileDialog,
+    QListWidget,
 )
 import os
 import sys
@@ -16,6 +17,7 @@ from main_ui import Ui_MainWindow
 from PyPDF2 import PdfReader
 import docx2txt
 from text_processing import preprocess_text
+from tfidf_vectorization import calculate_tfidf_matrix, compute_cosine_similarity, find_most_similar_resumes
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -49,10 +51,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btnNext.clicked.connect(self.handle_next_button_click)
         self.btnUpload.clicked.connect(self.handle_upload_button_click)
         self.btnAnalyze.clicked.connect(self.start_nlp_process)
+        self.btnFinish.clicked.connect(self.handle_finish_button_click)
 
 
         self.saved_job_description=''
         self.default_resume_count=3
+        self.num_resumes=0
         self.saved_resumes={}
 
 
@@ -133,10 +137,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         try:
             txtNoResumes = self.txtNoResumes.text().strip()  # Assume txtNoResumes is a QTextEdit or QLineEdit
-            num_resumes = int(txtNoResumes) if txtNoResumes else self.default_resume_count
+            self.num_resumes = int(txtNoResumes) if txtNoResumes else self.default_resume_count
 
-            if len(self.saved_resumes) < num_resumes:
-                QMessageBox.warning(self, "Warning", f"Not enough resumes uploaded. At least {num_resumes} resumes are required.")
+            if len(self.saved_resumes) < self.num_resumes:
+                QMessageBox.warning(self, "Warning", f"Not enough resumes uploaded. At least {self.num_resumes} resumes are required.")
             else:
                 # Proceed with NLP processing
                 self.stackedWidget.setCurrentIndex(2)
@@ -146,36 +150,78 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def analyze_resumes_for_nlp(self):
         """Analyzes the resumes for the most similar ones based on the job description."""
-        if not self.saved_resumes:
-            QMessageBox.warning(self, "Warning", "No files selected to analyze.")
-            return
-        # Preprocess job description
-        job_desc_text = self.saved_job_description
-        preprocessed_job_desc = preprocess_text(job_desc_text)
+        try:
+            if not self.saved_resumes:
+                QMessageBox.warning(self, "Warning", "No files selected to analyze.")
+                return
+            
+            job_desc_text = self.saved_job_description
+            if not job_desc_text:
+                QMessageBox.warning(self, "Warning", "Job description is empty. Please provide a valid job description.")
+                return
+            
+            # Preprocess the job description
+            preprocessed_job_desc = preprocess_text(job_desc_text)
 
-        # Preprocess each resume
-        preprocessed_resumes = {}
-        for file_path, text in self.saved_resumes.items():
-            preprocessed_resumes[file_path] = preprocess_text(text)
+            # Preprocess each resume
+            preprocessed_resumes = {}
+            for file_path, text in self.saved_resumes.items():
+                preprocessed_resumes[file_path] = preprocess_text(text)
 
-        # # Example NLP processing (replace with actual NLP logic)
-        # results = self.compare_resumes_with_job_description(self.saved_resumes)
-        # self.display_nlp_results(results)
+            # Include the job description in the resumes for TF-IDF calculation
+            all_texts = {**preprocessed_resumes, "job_description": preprocessed_job_desc}
 
-    def compare_resumes_with_job_description(self, resumes):
-        """Compares resumes against the job description and returns the most similar ones."""
-        # Placeholder function for comparing resumes to job description
-        # Example comparison logic (needs to be replaced with actual NLP techniques)
-        results = sorted(resumes.items(), key=lambda x: len(x[1]), reverse=True)  # Sorting by length as a placeholder
-        return results[:5]  # Return top 5 similar resumes
+            # Calculate TF-IDF matrix for all texts (job description + resumes)
+            tfidf_matrix, vectorizer = calculate_tfidf_matrix(all_texts)
+
+           
+            # Compute cosine similarity based on TF-IDF
+            similarity_matrix = compute_cosine_similarity(tfidf_matrix)
+
+            # Debug: Output the similarity matrix
+
+            # Find the top N most similar resumes
+            similar_resumes = find_most_similar_resumes(similarity_matrix, top_n=self.num_resumes)
+            self.display_nlp_results(similar_resumes)
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An error occurred during NLP analysis: {str(e)}")
+            print(f"An error occurred: {str(e)}")
+
 
     def display_nlp_results(self, results):
         """Displays the NLP results (most similar resumes) in the UI."""
-        # Update UI with the most similar resumes
-        self.resultsList.clear()
-        for i, (file_path, text) in enumerate(results):
-            self.resultsList.addItem(f"{i+1}. {file_path} (Length: {len(text)} characters)")
+        try:
+            self.resultsList.clear()  # Clear any existing content
+            
+            # Check if there are results to display
+            if not results:
+                QMessageBox.warning(self, "Warning", "No similar resumes found.")
+                return
 
+            for i, (index, score) in enumerate(results):
+                try:
+                    file_path = list(self.saved_resumes.keys())[index-1]
+                    file_name = os.path.basename(file_path)
+                    # Append the result to the QTextEdit
+                    self.resultsList.append(f"{i+1}. {file_name} (Similarity Score: {score:.3f})")
+                except IndexError:
+                    # Handle the case where the index might be out of range for the saved resumes
+                    QMessageBox.warning(self, "Warning", f"Invalid index for resume: {index}")
+                    print(f"Invalid index: {index}. Available keys: {list(self.saved_resumes.keys())}")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An error occurred while displaying results: {str(e)}")
+            print(f"An error occurred: {str(e)}")
+
+    
+
+    def handle_finish_button_click(self):
+        # Change to the first page of the stack widget
+        self.stackedWidget.setCurrentIndex(0)
+
+        # Clear the job description text
+        self.jobDescription.clear()
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls():
             event.accept()

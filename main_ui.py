@@ -1364,7 +1364,38 @@ class Ui_MainWindow(object):
         self.frame_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_12.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_12.setObjectName("frame_12")
+        self.verticalLayout_24 = QtWidgets.QVBoxLayout(self.frame_12)
+        self.verticalLayout_24.setObjectName("verticalLayout_24")
+        self.resultsList = QtWidgets.QTextEdit(self.frame_12)
+        self.resultsList.setStyleSheet("QTextEdit {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    color: #fff;\n"
+"    border-radius: 8px;\n"
+"    border: 2px dashed rgb(189, 147, 249);\n"
+"    padding: 5px;\n"
+"    font: 13pt \"Calibri\";\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+" QTextEdit:focus { border: 2px solid rgb(189, 147, 249);}")
+        self.resultsList.setReadOnly(True)
+        self.resultsList.setObjectName("resultsList")
+        self.verticalLayout_24.addWidget(self.resultsList)
         self.verticalLayout_20.addWidget(self.frame_12)
+        self.btnFinish = QtWidgets.QPushButton(self.frame_10)
+        self.btnFinish.setMinimumSize(QtCore.QSize(170, 40))
+        self.btnFinish.setMaximumSize(QtCore.QSize(170, 16777215))
+        self.btnFinish.setStyleSheet("\n"
+"#btnFinish{\n"
+"background-color:rgb(189, 147, 249);\n"
+"color:white;\n"
+"}\n"
+"#btnFinish:hover {\n"
+"background-color:rgb(200, 167, 249);\n"
+"}")
+        self.btnFinish.setObjectName("btnFinish")
+        self.verticalLayout_20.addWidget(self.btnFinish, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayout_19.addWidget(self.frame_10)
         self.stackedWidget.addWidget(self.result)
         self.verticalLayout_15.addWidget(self.stackedWidget)
@@ -1502,7 +1533,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.styleSheet)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1539,6 +1570,11 @@ class Ui_MainWindow(object):
         self.btnJobDes.setText(_translate("MainWindow", "1. The Job"))
         self.btnResumes.setText(_translate("MainWindow", "2. Resumes"))
         self.label.setText(_translate("MainWindow", "1. Paste your job description"))
+        self.jobDescription.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Calibri\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.jobDescription.setPlaceholderText(_translate("MainWindow", "Paste the job description in here so we can analyze its skills."))
         self.btnNext.setText(_translate("MainWindow", "Next"))
         self.btnJobDes_2.setText(_translate("MainWindow", "1. The Job"))
@@ -1551,6 +1587,7 @@ class Ui_MainWindow(object):
 "English resumes in PDF, DOCX and TXT."))
         self.btnAnalyze.setText(_translate("MainWindow", "Analyze"))
         self.label_5.setText(_translate("MainWindow", "Loading...Please Wait"))
+        self.btnFinish.setText(_translate("MainWindow", "Finish"))
         self.btn_message.setText(_translate("MainWindow", "Message"))
         self.btn_print.setText(_translate("MainWindow", "Print"))
         self.btn_logout.setText(_translate("MainWindow", "Logout"))

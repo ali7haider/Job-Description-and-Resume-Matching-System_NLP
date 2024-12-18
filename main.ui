@@ -1797,7 +1797,7 @@ p, li { white-space: pre-wrap; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="acceptDrops">
@@ -1994,6 +1994,13 @@ padding-left:0px;
                                </property>
                                <property name="frameShadow">
                                 <enum>QFrame::Sunken</enum>
+                               </property>
+                               <property name="html">
+                                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Calibri'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="placeholderText">
                                 <string>Paste the job description in here so we can analyze its skills.</string>
@@ -2485,6 +2492,58 @@ padding-left:0px;
                             </property>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_24">
+                             <item>
+                              <widget class="QTextEdit" name="resultsList">
+                               <property name="styleSheet">
+                                <string notr="true">QTextEdit {
+    background-color: rgb(33, 37, 43);
+    color: #fff;
+    border-radius: 8px;
+    border: 2px dashed rgb(189, 147, 249);
+    padding: 5px;
+	font: 13pt &quot;Calibri&quot;;
+}
+
+
+
+ QTextEdit:focus { border: 2px solid rgb(189, 147, 249);}</string>
+                               </property>
+                               <property name="readOnly">
+                                <bool>true</bool>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="btnFinish">
+                            <property name="minimumSize">
+                             <size>
+                              <width>170</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>170</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">
+#btnFinish{
+background-color:rgb(189, 147, 249);
+color:white;
+}
+#btnFinish:hover {
+background-color:rgb(200, 167, 249);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string>Finish</string>
                             </property>
                            </widget>
                           </item>
