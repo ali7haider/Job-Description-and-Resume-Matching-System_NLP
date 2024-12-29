@@ -909,6 +909,43 @@ Button */
                  </widget>
                 </item>
                 <item>
+                 <widget class="QPushButton" name="btnSingle">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>45</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Calibri</family>
+                    <pointsize>12</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="layoutDirection">
+                   <enum>Qt::LeftToRight</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-home.png);</string>
+                  </property>
+                  <property name="text">
+                   <string>Single Resume Analysis</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="btn_exit">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -948,6 +985,7 @@ Button */
                </layout>
                <zorder>btn_exit</zorder>
                <zorder>btnHome</zorder>
+               <zorder>btnSingle</zorder>
               </widget>
              </item>
              <item alignment="Qt::AlignBottom">
@@ -1797,7 +1835,7 @@ p, li { white-space: pre-wrap; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>5</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="acceptDrops">
@@ -1972,6 +2010,22 @@ padding-left:0px;
                                 <string>1. Paste your job description</string>
                                </property>
                               </widget>
+                             </item>
+                             <item>
+                              <spacer name="verticalSpacer_2">
+                               <property name="orientation">
+                                <enum>Qt::Vertical</enum>
+                               </property>
+                               <property name="sizeType">
+                                <enum>QSizePolicy::Fixed</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>20</width>
+                                 <height>15</height>
+                                </size>
+                               </property>
+                              </spacer>
                              </item>
                              <item>
                               <widget class="QTextEdit" name="jobDescription">
@@ -2520,6 +2574,730 @@ padding-left:0px;
                           </item>
                           <item alignment="Qt::AlignHCenter">
                            <widget class="QPushButton" name="btnFinish">
+                            <property name="minimumSize">
+                             <size>
+                              <width>170</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>170</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">
+#btnFinish{
+background-color:rgb(189, 147, 249);
+color:white;
+}
+#btnFinish:hover {
+background-color:rgb(200, 167, 249);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string>Finish</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="singleJob">
+                      <layout class="QVBoxLayout" name="verticalLayout_27">
+                       <item>
+                        <widget class="QFrame" name="frame_13">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_25">
+                          <property name="leftMargin">
+                           <number>11</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QFrame" name="frame_14">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_26">
+                             <property name="spacing">
+                              <number>12</number>
+                             </property>
+                             <item alignment="Qt::AlignHCenter">
+                              <widget class="QFrame" name="frame_15">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_11">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QPushButton" name="btnJobDes_3">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>180</width>
+                                    <height>40</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Calibri</family>
+                                    <pointsize>12</pointsize>
+                                    <weight>50</weight>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>ArrowCursor</cursorShape>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">
+#btnJobDes_3{
+background-color:rgb(189, 147, 249);
+color:white;
+}
+#btnJobDes_3:hover{
+border:none;
+}</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>1. The Job</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="btnResumes_3">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>180</width>
+                                    <height>40</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Calibri</family>
+                                    <pointsize>12</pointsize>
+                                    <weight>50</weight>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>ArrowCursor</cursorShape>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">
+#btnResumes_3{
+background-color: rgb(52, 59, 72);
+color:white;
+}
+#btnResumes_3:hover{
+border:none;
+}</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>2. Resume</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item alignment="Qt::AlignLeft">
+                              <widget class="QLabel" name="label_6">
+                               <property name="styleSheet">
+                                <string notr="true">QLabel {
+    font: 75 14pt &quot;Calibri&quot;;
+    font-weight: bold; /* Make the text bold */
+    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */
+    padding: 8px; /* Padding inside the QLabel */
+    text-align: center; /* Center-align the text */
+padding-left:0px;
+}
+</string>
+                               </property>
+                               <property name="text">
+                                <string>1. Paste your job description</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <spacer name="verticalSpacer">
+                               <property name="orientation">
+                                <enum>Qt::Vertical</enum>
+                               </property>
+                               <property name="sizeType">
+                                <enum>QSizePolicy::Fixed</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>20</width>
+                                 <height>15</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QTextEdit" name="jobDescription_2">
+                               <property name="styleSheet">
+                                <string notr="true">QTextEdit {
+    background-color: rgb(33, 37, 43);
+    color: #fff;
+    border-radius: 8px;
+    border: 2px dashed rgb(189, 147, 249);
+    padding: 5px;
+	font: 13pt &quot;Calibri&quot;;
+}
+
+
+
+ QTextEdit:focus { border: 2px solid rgb(189, 147, 249);}</string>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Sunken</enum>
+                               </property>
+                               <property name="html">
+                                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Calibri'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="placeholderText">
+                                <string>Paste the job description in here so we can analyze its skills.</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item alignment="Qt::AlignHCenter">
+                              <widget class="QPushButton" name="btnNext_2">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>160</width>
+                                 <height>45</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>Calibri</family>
+                                 <pointsize>12</pointsize>
+                                 <weight>50</weight>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="cursor">
+                                <cursorShape>PointingHandCursor</cursorShape>
+                               </property>
+                               <property name="layoutDirection">
+                                <enum>Qt::LeftToRight</enum>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">
+#btnNext_2{
+background-color:rgb(189, 147, 249);
+color:white;
+}
+#btnNext_2:hover {
+background-color:rgb(200, 167, 249);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>Next</string>
+                               </property>
+                               <property name="icon">
+                                <iconset resource="resources.qrc">
+                                 <normaloff>:/icons/images/icons/cil-caret-right.png</normaloff>:/icons/images/icons/cil-caret-right.png</iconset>
+                               </property>
+                               <property name="iconSize">
+                                <size>
+                                 <width>25</width>
+                                 <height>25</height>
+                                </size>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="singleResume">
+                      <layout class="QVBoxLayout" name="verticalLayout_31">
+                       <item>
+                        <widget class="QFrame" name="frame_16">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_28">
+                          <property name="leftMargin">
+                           <number>11</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QFrame" name="frame_17">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_29">
+                             <property name="spacing">
+                              <number>12</number>
+                             </property>
+                             <item alignment="Qt::AlignHCenter">
+                              <widget class="QFrame" name="frame_18">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QPushButton" name="btnJobDes_4">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>180</width>
+                                    <height>40</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Calibri</family>
+                                    <pointsize>12</pointsize>
+                                    <weight>50</weight>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>PointingHandCursor</cursorShape>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">
+
+
+#btnJobDes_4{
+background-color: rgb(52, 59, 72);
+color:white;
+}
+</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>1. The Job</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="btnResumes_4">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>180</width>
+                                    <height>40</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Calibri</family>
+                                    <pointsize>12</pointsize>
+                                    <weight>50</weight>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>PointingHandCursor</cursorShape>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">
+#btnResumes_4{
+background-color:rgb(189, 147, 249);
+color:white;
+}
+</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>2. Resumes</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_19">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>100</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item alignment="Qt::AlignLeft">
+                                 <widget class="QLabel" name="label_7">
+                                  <property name="styleSheet">
+                                   <string notr="true">QLabel {
+    font: 75 14pt &quot;Calibri&quot;;
+    font-weight: bold; /* Make the text bold */
+    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */
+    padding: 8px; /* Padding inside the QLabel */
+    text-align: center; /* Center-align the text */
+padding-left:0px;
+}
+</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>2. Upload your resumes</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item alignment="Qt::AlignLeft">
+                              <widget class="QFrame" name="frame_20">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_14"/>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_21">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>350</height>
+                                </size>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">    border: 2px dashed rgb(189, 147, 249);
+</string>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_30">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QPushButton" name="btnUpload_2">
+                                  <property name="sizePolicy">
+                                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                   </sizepolicy>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>PointingHandCursor</cursorShape>
+                                  </property>
+                                  <property name="acceptDrops">
+                                   <bool>true</bool>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">QPushButton {
+    background-color: rgb(52, 59, 72); /* Dark gray background color */
+    background-image: url(:/icons/images/icons/icons8-upload-via-bowser-100.png); /*
+ Icon image */
+	background-image: url(:/icons/images/icons/icons8-upload-to-cloud-100.png);
+    background-position: center; /* Center the icon */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-size: contain; /* Scale the image to fit the button */
+    border: none; /* No border */
+    padding-top: 170px; /* Space inside the button */
+    color: white; /* Text color */
+    font-weight: bold; /* Bold text */
+    text-align: center; /* Center text */
+}
+</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>Click the button above or drop your resume in here!
+English resumes in PDF, DOCX and TXT.</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="btnAnalyze_2">
+                            <property name="minimumSize">
+                             <size>
+                              <width>160</width>
+                              <height>45</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Calibri</family>
+                              <pointsize>12</pointsize>
+                              <weight>50</weight>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="cursor">
+                             <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
+                            <property name="layoutDirection">
+                             <enum>Qt::LeftToRight</enum>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">
+#btnAnalyze_2{
+background-color:rgb(189, 147, 249);
+color:white;
+}
+#btnAnalyze_2:hover {
+background-color:rgb(200, 167, 249);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string>Analyze</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="resources.qrc">
+                              <normaloff>:/icons/images/icons/cil-input.png</normaloff>:/icons/images/icons/cil-input.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>25</width>
+                              <height>25</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="singleResult">
+                      <layout class="QVBoxLayout" name="verticalLayout_36">
+                       <item>
+                        <widget class="QFrame" name="frame_22">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_32">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QFrame" name="frame_23">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>100</height>
+                             </size>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_33">
+                             <item>
+                              <widget class="QLabel" name="label_8">
+                               <property name="styleSheet">
+                                <string notr="true">QLabel {
+    font: 75 14pt &quot;Calibri&quot;;
+    font-weight: bold; /* Make the text bold */
+    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */
+    padding: 8px; /* Padding inside the QLabel */
+    text-align: center; /* Center-align the text */
+padding-left:0px;
+}
+</string>
+                               </property>
+                               <property name="text">
+                                <string>Loading...Please Wait</string>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignCenter</set>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_24">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_34">
+                             <item>
+                              <widget class="QTextEdit" name="txtSingleResult">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QTextEdit {
+    background-color: rgb(33, 37, 43);
+    color: #fff;
+    border-radius: 8px;
+    border: 2px dashed rgb(189, 147, 249);
+    padding: 5px;
+	font: 13pt &quot;Calibri&quot;;
+}
+
+
+
+ QTextEdit:focus { border: 2px solid rgb(189, 147, 249);}</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QTextEdit" name="lblGraph">
+                               <property name="styleSheet">
+                                <string notr="true">QTextEdit {
+    background-color: rgb(33, 37, 43);
+    color: #fff;
+    border-radius: 8px;
+    padding: 5px;
+	font: 13pt &quot;Calibri&quot;;
+}
+
+
+
+</string>
+                               </property>
+                               <property name="readOnly">
+                                <bool>true</bool>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="btnFinish_2">
                             <property name="minimumSize">
                              <size>
                               <width>170</width>
