@@ -301,11 +301,12 @@ class NLPWorker(QThread):
                 job_desc_embedding = self.model(**job_desc_tokens).last_hidden_state.mean(dim=1).numpy()
 
             self.update_label.emit("Generating embeddings for resumes...")
-            resume_texts = list(self.saved_resumes.values())
-            tokens = self.tokenizer(resume_texts, padding=True, truncation=True, return_tensors='pt')
+            preprocessed_resumes = [preprocess_text(resume) for resume in self.saved_resumes.values()]
+
+            resume_tokens = self.tokenizer(preprocessed_resumes, padding=True, truncation=True, return_tensors='pt')
 
             with torch.no_grad():
-                output = self.model(**tokens).last_hidden_state
+                output = self.model(**resume_tokens).last_hidden_state
             resume_embeddings = output.mean(dim=1).numpy()
 
             self.update_label.emit("Calculating cosine similarity...")
