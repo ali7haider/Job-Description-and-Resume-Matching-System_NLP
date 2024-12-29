@@ -17,13 +17,21 @@ from main_ui import Ui_MainWindow
 from PyPDF2 import PdfReader
 import docx2txt
 from text_processing import preprocess_text
-from tfidf_vectorization import calculate_tfidf_matrix, compute_cosine_similarity, find_most_similar_resumes
-
+from transformers import DistilBertTokenizer, DistilBertModel
+import torch
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+        # Specify a cache directory for Hugging Face models
+        cache_dir = ".huggingface_cache"
 
+        # Initialize the DistilBERT tokenizer and model
+        print("Initializing DistilBERT tokenizer and model with caching...")
+        self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
+        self.model = DistilBertModel.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
         # Set up the user interface from the generated class
         self.setupUi(self)
         from modules.ui_functions import UIFunctions
@@ -149,71 +157,50 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             QMessageBox.warning(self, "Error", "Invalid number entered for minimum resumes. Please enter a valid integer.")
 
     def analyze_resumes_for_nlp(self):
-        """Analyzes the resumes for the most similar ones based on the job description."""
+        """Start NLP processing in a background thread."""
         try:
-            if not self.saved_resumes:
-                QMessageBox.warning(self, "Warning", "No files selected to analyze.")
-                return
-            
-            job_desc_text = self.saved_job_description
-            if not job_desc_text:
-                QMessageBox.warning(self, "Warning", "Job description is empty. Please provide a valid job description.")
-                return
-            
-            # Preprocess the job description
-            preprocessed_job_desc = preprocess_text(job_desc_text)
+            # Create the NLPWorker thread
+            self.nlp_worker = NLPWorker(self.saved_resumes, self.saved_job_description, self.tokenizer, self.model, self.default_resume_count)
 
-            # Preprocess each resume
-            preprocessed_resumes = {}
-            for file_path, text in self.saved_resumes.items():
-                preprocessed_resumes[file_path] = preprocess_text(text)
+            # Connect signals for UI updates
+            self.nlp_worker.update_label.connect(self.label_5.setText)
+            self.nlp_worker.update_results.connect(self.display_nlp_results)
 
-            # Include the job description in the resumes for TF-IDF calculation
-            all_texts = {**preprocessed_resumes, "job_description": preprocessed_job_desc}
+            # Start the background thread
+            self.nlp_worker.start()
 
-            # Calculate TF-IDF matrix for all texts (job description + resumes)
-            tfidf_matrix, vectorizer = calculate_tfidf_matrix(all_texts)
-
-           
-            # Compute cosine similarity based on TF-IDF
-            similarity_matrix = compute_cosine_similarity(tfidf_matrix)
-
-            # Debug: Output the similarity matrix
-
-            # Find the top N most similar resumes
-            similar_resumes = find_most_similar_resumes(similarity_matrix, top_n=self.num_resumes)
-            self.display_nlp_results(similar_resumes)
+            # Change to the page with the processing label
+            self.stackedWidget.setCurrentIndex(2)
 
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"An error occurred during NLP analysis: {str(e)}")
+            QMessageBox.critical(self, "Error", f"An error occurred while starting NLP processing: {str(e)}")
             print(f"An error occurred: {str(e)}")
-
 
     def display_nlp_results(self, results):
         """Displays the NLP results (most similar resumes) in the UI."""
         try:
             self.resultsList.clear()  # Clear any existing content
-            
+
             # Check if there are results to display
             if not results:
                 QMessageBox.warning(self, "Warning", "No similar resumes found.")
                 return
 
-            for i, (index, score) in enumerate(results):
+            for i, (file_path, score) in enumerate(results):
                 try:
-                    file_path = list(self.saved_resumes.keys())[index-1]
-                    file_name = os.path.basename(file_path)
+                    file_name = os.path.basename(file_path)  # Get the file name from the file path
                     # Append the result to the QTextEdit
                     self.resultsList.append(f"{i+1}. {file_name} (Similarity Score: {score:.3f})")
-                except IndexError:
-                    # Handle the case where the index might be out of range for the saved resumes
-                    QMessageBox.warning(self, "Warning", f"Invalid index for resume: {index}")
-                    print(f"Invalid index: {index}. Available keys: {list(self.saved_resumes.keys())}")
+                except Exception as e:
+                    # Handle any unexpected errors for this specific resume
+                    QMessageBox.warning(self, "Warning", f"Error processing resume: {file_path}")
+                    print(f"Error processing file {file_path}: {str(e)}")
+
+            print("Results displayed successfully.")
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An error occurred while displaying results: {str(e)}")
             print(f"An error occurred: {str(e)}")
-
     
 
     def handle_finish_button_click(self):
@@ -281,6 +268,58 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     
 
+from PyQt5.QtCore import QThread, pyqtSignal
+
+class NLPWorker(QThread):
+    # Define signals for updating UI
+    update_label = pyqtSignal(str)
+    update_results = pyqtSignal(list)
+
+    def __init__(self, saved_resumes, job_description, tokenizer, model, default_resume_count):
+        super().__init__()
+        self.saved_resumes = saved_resumes
+        self.job_description = job_description
+        self.tokenizer = tokenizer
+        self.model = model
+        self.default_resume_count = default_resume_count
+
+    def run(self):
+        try:
+            if not self.saved_resumes:
+                self.update_label.emit("No files selected to analyze.")
+                return
+
+            if not self.job_description:
+                self.update_label.emit("Job description is empty. Please provide a valid job description.")
+                return
+
+            preprocessed_job_desc = preprocess_text(self.job_description)
+
+            self.update_label.emit("Starting NLP analysis...")
+            job_desc_tokens = self.tokenizer(preprocessed_job_desc, padding=True, truncation=True, return_tensors='pt')
+            with torch.no_grad():
+                job_desc_embedding = self.model(**job_desc_tokens).last_hidden_state.mean(dim=1).numpy()
+
+            self.update_label.emit("Generating embeddings for resumes...")
+            resume_texts = list(self.saved_resumes.values())
+            tokens = self.tokenizer(resume_texts, padding=True, truncation=True, return_tensors='pt')
+
+            with torch.no_grad():
+                output = self.model(**tokens).last_hidden_state
+            resume_embeddings = output.mean(dim=1).numpy()
+
+            self.update_label.emit("Calculating cosine similarity...")
+            similarity_scores = cosine_similarity(job_desc_embedding, resume_embeddings)[0]
+
+            # Map scores to file paths
+            results = sorted(zip(self.saved_resumes.keys(), similarity_scores), key=lambda x: x[1], reverse=True)
+            self.update_label.emit("Displaying Results")
+
+            self.update_results.emit(results[:self.default_resume_count])
+
+        except Exception as e:
+            self.update_label.emit(f"An error occurred: {str(e)}")
+            print(f"An error occurred: {str(e)}")
 
 
 if __name__ == "__main__":
