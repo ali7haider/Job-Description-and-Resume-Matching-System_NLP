@@ -1,6 +1,7 @@
 import sys
 import os
 from PyQt5.QtCore import Qt
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -34,8 +35,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Initialize the DistilBERT tokenizer and model
         print("Initializing DistilBERT tokenizer and model with caching...")
-        # self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
-        # self.model = DistilBertModel.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
+        self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
+        self.model = DistilBertModel.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
         # Set up the user interface from the generated class
 
         self.modelTrained = Doc2Vec.load('cv_job_maching.model')
@@ -412,7 +413,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         buttons = self.findChildren(QPushButton)  # Find all QPushButton objects
         for button in buttons:
             button.setCursor(Qt.PointingHandCursor)
+    def mousePressEvent(self, event):
+        """Capture the position when mouse is pressed."""
+        if event.button() == QtCore.Qt.LeftButton:
+            self.dragPos = event.globalPos()  # Save the position of the mouse when it's clicked
 
+    def mouseMoveEvent(self, event):
+        """Move the window based on mouse movement."""
+        if self.dragPos:
+            # Move the window using the difference between the current and initial positions
+            self.move(self.pos() + event.globalPos() - self.dragPos)
+            self.dragPos = event.globalPos()  # Update dragPos to the new mouse position
+
+    def mouseReleaseEvent(self, event):
+        """Clear dragPos when mouse button is released."""
+        self.dragPos = None
 
     
 
