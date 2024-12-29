@@ -685,6 +685,26 @@ class Ui_MainWindow(object):
         self.btnHome.setStyleSheet("background-image: url(:/icons/images/icons/cil-home.png);")
         self.btnHome.setObjectName("btnHome")
         self.verticalLayout_8.addWidget(self.btnHome)
+        self.btnSingle = QtWidgets.QPushButton(self.topMenu)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btnSingle.sizePolicy().hasHeightForWidth())
+        self.btnSingle.setSizePolicy(sizePolicy)
+        self.btnSingle.setMinimumSize(QtCore.QSize(0, 45))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.btnSingle.setFont(font)
+        self.btnSingle.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnSingle.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.btnSingle.setStyleSheet("background-image: url(:/icons/images/icons/cil-equalizer.png);\n"
+"")
+        self.btnSingle.setObjectName("btnSingle")
+        self.verticalLayout_8.addWidget(self.btnSingle)
         self.btn_exit = QtWidgets.QPushButton(self.topMenu)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -706,6 +726,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.addWidget(self.btn_exit)
         self.btn_exit.raise_()
         self.btnHome.raise_()
+        self.btnSingle.raise_()
         self.verticalMenuLayout.addWidget(self.topMenu, 0, QtCore.Qt.AlignTop)
         self.bottomMenu = QtWidgets.QFrame(self.leftMenuFrame)
         self.bottomMenu.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -1102,6 +1123,8 @@ class Ui_MainWindow(object):
 "")
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label, 0, QtCore.Qt.AlignLeft)
+        spacerItem = QtWidgets.QSpacerItem(20, 15, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout.addItem(spacerItem)
         self.jobDescription = QtWidgets.QTextEdit(self.frame_3)
         self.jobDescription.setStyleSheet("QTextEdit {\n"
 "    background-color: rgb(33, 37, 43);\n"
@@ -1398,6 +1421,373 @@ class Ui_MainWindow(object):
         self.verticalLayout_20.addWidget(self.btnFinish, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayout_19.addWidget(self.frame_10)
         self.stackedWidget.addWidget(self.result)
+        self.singleJob = QtWidgets.QWidget()
+        self.singleJob.setObjectName("singleJob")
+        self.verticalLayout_27 = QtWidgets.QVBoxLayout(self.singleJob)
+        self.verticalLayout_27.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_27.setObjectName("verticalLayout_27")
+        self.frame_13 = QtWidgets.QFrame(self.singleJob)
+        self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_13.setObjectName("frame_13")
+        self.verticalLayout_25 = QtWidgets.QVBoxLayout(self.frame_13)
+        self.verticalLayout_25.setContentsMargins(11, 0, 0, 0)
+        self.verticalLayout_25.setObjectName("verticalLayout_25")
+        self.frame_14 = QtWidgets.QFrame(self.frame_13)
+        self.frame_14.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_14.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_14.setObjectName("frame_14")
+        self.verticalLayout_26 = QtWidgets.QVBoxLayout(self.frame_14)
+        self.verticalLayout_26.setSpacing(12)
+        self.verticalLayout_26.setObjectName("verticalLayout_26")
+        self.frame_15 = QtWidgets.QFrame(self.frame_14)
+        self.frame_15.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_15.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_15.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_15.setObjectName("frame_15")
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_15)
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_11.setSpacing(0)
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        self.btnJobDes_3 = QtWidgets.QPushButton(self.frame_15)
+        self.btnJobDes_3.setMinimumSize(QtCore.QSize(180, 40))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.btnJobDes_3.setFont(font)
+        self.btnJobDes_3.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.btnJobDes_3.setStyleSheet("\n"
+"#btnJobDes_3{\n"
+"background-color:rgb(189, 147, 249);\n"
+"color:white;\n"
+"}\n"
+"#btnJobDes_3:hover{\n"
+"border:none;\n"
+"}")
+        self.btnJobDes_3.setObjectName("btnJobDes_3")
+        self.horizontalLayout_11.addWidget(self.btnJobDes_3)
+        self.btnResumes_3 = QtWidgets.QPushButton(self.frame_15)
+        self.btnResumes_3.setMinimumSize(QtCore.QSize(180, 40))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.btnResumes_3.setFont(font)
+        self.btnResumes_3.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.btnResumes_3.setStyleSheet("\n"
+"#btnResumes_3{\n"
+"background-color: rgb(52, 59, 72);\n"
+"color:white;\n"
+"}\n"
+"#btnResumes_3:hover{\n"
+"border:none;\n"
+"}")
+        self.btnResumes_3.setObjectName("btnResumes_3")
+        self.horizontalLayout_11.addWidget(self.btnResumes_3)
+        self.verticalLayout_26.addWidget(self.frame_15, 0, QtCore.Qt.AlignHCenter)
+        self.label_6 = QtWidgets.QLabel(self.frame_14)
+        self.label_6.setStyleSheet("QLabel {\n"
+"    font: 75 14pt \"Calibri\";\n"
+"    font-weight: bold; /* Make the text bold */\n"
+"    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */\n"
+"    padding: 8px; /* Padding inside the QLabel */\n"
+"    text-align: center; /* Center-align the text */\n"
+"padding-left:0px;\n"
+"}\n"
+"")
+        self.label_6.setObjectName("label_6")
+        self.verticalLayout_26.addWidget(self.label_6, 0, QtCore.Qt.AlignLeft)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 15, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_26.addItem(spacerItem1)
+        self.jobDescription_2 = QtWidgets.QTextEdit(self.frame_14)
+        self.jobDescription_2.setStyleSheet("QTextEdit {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    color: #fff;\n"
+"    border-radius: 8px;\n"
+"    border: 2px dashed rgb(189, 147, 249);\n"
+"    padding: 5px;\n"
+"    font: 13pt \"Calibri\";\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+" QTextEdit:focus { border: 2px solid rgb(189, 147, 249);}")
+        self.jobDescription_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.jobDescription_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.jobDescription_2.setObjectName("jobDescription_2")
+        self.verticalLayout_26.addWidget(self.jobDescription_2)
+        self.btnNext_2 = QtWidgets.QPushButton(self.frame_14)
+        self.btnNext_2.setMinimumSize(QtCore.QSize(160, 45))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.btnNext_2.setFont(font)
+        self.btnNext_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnNext_2.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.btnNext_2.setStyleSheet("\n"
+"#btnNext_2{\n"
+"background-color:rgb(189, 147, 249);\n"
+"color:white;\n"
+"}\n"
+"#btnNext_2:hover {\n"
+"background-color:rgb(200, 167, 249);\n"
+"}")
+        self.btnNext_2.setIcon(icon4)
+        self.btnNext_2.setIconSize(QtCore.QSize(25, 25))
+        self.btnNext_2.setObjectName("btnNext_2")
+        self.verticalLayout_26.addWidget(self.btnNext_2, 0, QtCore.Qt.AlignHCenter)
+        self.verticalLayout_25.addWidget(self.frame_14)
+        self.verticalLayout_27.addWidget(self.frame_13)
+        self.stackedWidget.addWidget(self.singleJob)
+        self.singleResume = QtWidgets.QWidget()
+        self.singleResume.setObjectName("singleResume")
+        self.verticalLayout_31 = QtWidgets.QVBoxLayout(self.singleResume)
+        self.verticalLayout_31.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_31.setObjectName("verticalLayout_31")
+        self.frame_16 = QtWidgets.QFrame(self.singleResume)
+        self.frame_16.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_16.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_16.setObjectName("frame_16")
+        self.verticalLayout_28 = QtWidgets.QVBoxLayout(self.frame_16)
+        self.verticalLayout_28.setContentsMargins(11, 0, 0, 0)
+        self.verticalLayout_28.setObjectName("verticalLayout_28")
+        self.frame_17 = QtWidgets.QFrame(self.frame_16)
+        self.frame_17.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_17.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_17.setObjectName("frame_17")
+        self.verticalLayout_29 = QtWidgets.QVBoxLayout(self.frame_17)
+        self.verticalLayout_29.setSpacing(12)
+        self.verticalLayout_29.setObjectName("verticalLayout_29")
+        self.frame_18 = QtWidgets.QFrame(self.frame_17)
+        self.frame_18.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_18.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_18.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_18.setObjectName("frame_18")
+        self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.frame_18)
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_12.setSpacing(0)
+        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+        self.btnJobDes_4 = QtWidgets.QPushButton(self.frame_18)
+        self.btnJobDes_4.setMinimumSize(QtCore.QSize(180, 40))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.btnJobDes_4.setFont(font)
+        self.btnJobDes_4.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnJobDes_4.setStyleSheet("\n"
+"\n"
+"\n"
+"#btnJobDes_4{\n"
+"background-color: rgb(52, 59, 72);\n"
+"color:white;\n"
+"}\n"
+"")
+        self.btnJobDes_4.setObjectName("btnJobDes_4")
+        self.horizontalLayout_12.addWidget(self.btnJobDes_4)
+        self.btnResumes_4 = QtWidgets.QPushButton(self.frame_18)
+        self.btnResumes_4.setMinimumSize(QtCore.QSize(180, 40))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.btnResumes_4.setFont(font)
+        self.btnResumes_4.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnResumes_4.setStyleSheet("\n"
+"#btnResumes_4{\n"
+"background-color:rgb(189, 147, 249);\n"
+"color:white;\n"
+"}\n"
+"")
+        self.btnResumes_4.setObjectName("btnResumes_4")
+        self.horizontalLayout_12.addWidget(self.btnResumes_4)
+        self.verticalLayout_29.addWidget(self.frame_18, 0, QtCore.Qt.AlignHCenter)
+        self.frame_19 = QtWidgets.QFrame(self.frame_17)
+        self.frame_19.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.frame_19.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_19.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_19.setObjectName("frame_19")
+        self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_19)
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
+        self.label_7 = QtWidgets.QLabel(self.frame_19)
+        self.label_7.setStyleSheet("QLabel {\n"
+"    font: 75 14pt \"Calibri\";\n"
+"    font-weight: bold; /* Make the text bold */\n"
+"    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */\n"
+"    padding: 8px; /* Padding inside the QLabel */\n"
+"    text-align: center; /* Center-align the text */\n"
+"padding-left:0px;\n"
+"}\n"
+"")
+        self.label_7.setObjectName("label_7")
+        self.horizontalLayout_13.addWidget(self.label_7, 0, QtCore.Qt.AlignLeft)
+        self.verticalLayout_29.addWidget(self.frame_19)
+        self.lbFilesSelected_2 = QtWidgets.QLabel(self.frame_17)
+        self.lbFilesSelected_2.setStyleSheet("    font: 75 11pt \"Calibri\";\n"
+"    font-weight: bold; /* Make the text bold */\n"
+"color:rgb(189, 147, 249); /* Bottom border with color */")
+        self.lbFilesSelected_2.setText("")
+        self.lbFilesSelected_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.lbFilesSelected_2.setObjectName("lbFilesSelected_2")
+        self.verticalLayout_29.addWidget(self.lbFilesSelected_2)
+        self.frame_20 = QtWidgets.QFrame(self.frame_17)
+        self.frame_20.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_20.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_20.setObjectName("frame_20")
+        self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_20)
+        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
+        self.verticalLayout_29.addWidget(self.frame_20, 0, QtCore.Qt.AlignLeft)
+        self.frame_21 = QtWidgets.QFrame(self.frame_17)
+        self.frame_21.setMinimumSize(QtCore.QSize(0, 350))
+        self.frame_21.setStyleSheet("    border: 2px dashed rgb(189, 147, 249);\n"
+"")
+        self.frame_21.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_21.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_21.setObjectName("frame_21")
+        self.verticalLayout_30 = QtWidgets.QVBoxLayout(self.frame_21)
+        self.verticalLayout_30.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_30.setObjectName("verticalLayout_30")
+        self.btnUpload_2 = QtWidgets.QPushButton(self.frame_21)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btnUpload_2.sizePolicy().hasHeightForWidth())
+        self.btnUpload_2.setSizePolicy(sizePolicy)
+        self.btnUpload_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnUpload_2.setAcceptDrops(True)
+        self.btnUpload_2.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(52, 59, 72); /* Dark gray background color */\n"
+"    background-image: url(:/icons/images/icons/icons8-upload-via-bowser-100.png); /*\n"
+" Icon image */\n"
+"    background-image: url(:/icons/images/icons/icons8-upload-to-cloud-100.png);\n"
+"    background-position: center; /* Center the icon */\n"
+"    background-repeat: no-repeat; /* Do not repeat the background image */\n"
+"    background-size: contain; /* Scale the image to fit the button */\n"
+"    border: none; /* No border */\n"
+"    padding-top: 170px; /* Space inside the button */\n"
+"    color: white; /* Text color */\n"
+"    font-weight: bold; /* Bold text */\n"
+"    text-align: center; /* Center text */\n"
+"}\n"
+"")
+        self.btnUpload_2.setObjectName("btnUpload_2")
+        self.verticalLayout_30.addWidget(self.btnUpload_2)
+        self.verticalLayout_29.addWidget(self.frame_21)
+        self.verticalLayout_28.addWidget(self.frame_17)
+        self.btnAnalyze_2 = QtWidgets.QPushButton(self.frame_16)
+        self.btnAnalyze_2.setMinimumSize(QtCore.QSize(160, 45))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.btnAnalyze_2.setFont(font)
+        self.btnAnalyze_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnAnalyze_2.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.btnAnalyze_2.setStyleSheet("\n"
+"#btnAnalyze_2{\n"
+"background-color:rgb(189, 147, 249);\n"
+"color:white;\n"
+"}\n"
+"#btnAnalyze_2:hover {\n"
+"background-color:rgb(200, 167, 249);\n"
+"}")
+        self.btnAnalyze_2.setIcon(icon5)
+        self.btnAnalyze_2.setIconSize(QtCore.QSize(25, 25))
+        self.btnAnalyze_2.setObjectName("btnAnalyze_2")
+        self.verticalLayout_28.addWidget(self.btnAnalyze_2, 0, QtCore.Qt.AlignHCenter)
+        self.verticalLayout_31.addWidget(self.frame_16)
+        self.stackedWidget.addWidget(self.singleResume)
+        self.singleResult = QtWidgets.QWidget()
+        self.singleResult.setObjectName("singleResult")
+        self.verticalLayout_36 = QtWidgets.QVBoxLayout(self.singleResult)
+        self.verticalLayout_36.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_36.setObjectName("verticalLayout_36")
+        self.frame_22 = QtWidgets.QFrame(self.singleResult)
+        self.frame_22.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_22.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_22.setObjectName("frame_22")
+        self.verticalLayout_32 = QtWidgets.QVBoxLayout(self.frame_22)
+        self.verticalLayout_32.setObjectName("verticalLayout_32")
+        self.frame_23 = QtWidgets.QFrame(self.frame_22)
+        self.frame_23.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.frame_23.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_23.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_23.setObjectName("frame_23")
+        self.verticalLayout_33 = QtWidgets.QVBoxLayout(self.frame_23)
+        self.verticalLayout_33.setObjectName("verticalLayout_33")
+        self.label_8 = QtWidgets.QLabel(self.frame_23)
+        self.label_8.setStyleSheet("QLabel {\n"
+"    font: 75 14pt \"Calibri\";\n"
+"    font-weight: bold; /* Make the text bold */\n"
+"    border-bottom: 2px solid rgb(189, 147, 249); /* Bottom border with color */\n"
+"    padding: 8px; /* Padding inside the QLabel */\n"
+"    text-align: center; /* Center-align the text */\n"
+"padding-left:0px;\n"
+"}\n"
+"")
+        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_8.setObjectName("label_8")
+        self.verticalLayout_33.addWidget(self.label_8)
+        self.verticalLayout_32.addWidget(self.frame_23, 0, QtCore.Qt.AlignHCenter)
+        self.frame_24 = QtWidgets.QFrame(self.frame_22)
+        self.frame_24.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_24.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_24.setObjectName("frame_24")
+        self.verticalLayout_34 = QtWidgets.QVBoxLayout(self.frame_24)
+        self.verticalLayout_34.setObjectName("verticalLayout_34")
+        self.txtSingleResult = QtWidgets.QTextEdit(self.frame_24)
+        self.txtSingleResult.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.txtSingleResult.setStyleSheet("QTextEdit {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    color: #fff;\n"
+"    border-radius: 8px;\n"
+"    border: 2px dashed rgb(189, 147, 249);\n"
+"    padding: 5px;\n"
+"    font: 13pt \"Calibri\";\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+" QTextEdit:focus { border: 2px solid rgb(189, 147, 249);}")
+        self.txtSingleResult.setReadOnly(True)
+        self.txtSingleResult.setObjectName("txtSingleResult")
+        self.verticalLayout_34.addWidget(self.txtSingleResult)
+        self.lblGraph = QtWidgets.QLabel(self.frame_24)
+        self.lblGraph.setText("")
+        self.lblGraph.setScaledContents(True)
+        self.lblGraph.setObjectName("lblGraph")
+        self.verticalLayout_34.addWidget(self.lblGraph)
+        self.verticalLayout_32.addWidget(self.frame_24)
+        self.btnFinish_2 = QtWidgets.QPushButton(self.frame_22)
+        self.btnFinish_2.setMinimumSize(QtCore.QSize(170, 40))
+        self.btnFinish_2.setMaximumSize(QtCore.QSize(170, 16777215))
+        self.btnFinish_2.setStyleSheet("\n"
+"#btnFinish_2{\n"
+"background-color:rgb(189, 147, 249);\n"
+"color:white;\n"
+"}\n"
+"#btnFinish_2:hover {\n"
+"background-color:rgb(200, 167, 249);\n"
+"}")
+        self.btnFinish_2.setObjectName("btnFinish_2")
+        self.verticalLayout_32.addWidget(self.btnFinish_2, 0, QtCore.Qt.AlignHCenter)
+        self.verticalLayout_36.addWidget(self.frame_22)
+        self.stackedWidget.addWidget(self.singleResult)
         self.verticalLayout_15.addWidget(self.stackedWidget)
         self.horizontalLayout_4.addWidget(self.pagesContainer)
         self.extraRightBox = QtWidgets.QFrame(self.content)
@@ -1533,7 +1923,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.styleSheet)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1543,6 +1933,7 @@ class Ui_MainWindow(object):
         self.titleLeftApp.setText(_translate("MainWindow", "Job Description and Resume Matching System"))
         self.toggleButton.setText(_translate("MainWindow", "Hide"))
         self.btnHome.setText(_translate("MainWindow", "Home"))
+        self.btnSingle.setText(_translate("MainWindow", "Single Resume Analysis"))
         self.btn_exit.setText(_translate("MainWindow", "Exit"))
         self.toggleLeftBox.setText(_translate("MainWindow", "Settings"))
         self.extraLabel.setText(_translate("MainWindow", "Left Box"))
@@ -1588,6 +1979,24 @@ class Ui_MainWindow(object):
         self.btnAnalyze.setText(_translate("MainWindow", "Analyze"))
         self.label_5.setText(_translate("MainWindow", "Loading...Please Wait"))
         self.btnFinish.setText(_translate("MainWindow", "Finish"))
+        self.btnJobDes_3.setText(_translate("MainWindow", "1. The Job"))
+        self.btnResumes_3.setText(_translate("MainWindow", "2. Resume"))
+        self.label_6.setText(_translate("MainWindow", "1. Paste your job description"))
+        self.jobDescription_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Calibri\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.jobDescription_2.setPlaceholderText(_translate("MainWindow", "Paste the job description in here so we can analyze its skills."))
+        self.btnNext_2.setText(_translate("MainWindow", "Next"))
+        self.btnJobDes_4.setText(_translate("MainWindow", "1. The Job"))
+        self.btnResumes_4.setText(_translate("MainWindow", "2. Resume"))
+        self.label_7.setText(_translate("MainWindow", "2. Upload your resume"))
+        self.btnUpload_2.setText(_translate("MainWindow", "Click the button above or drop your resume in here!\n"
+"English resumes in PDF, DOCX and TXT."))
+        self.btnAnalyze_2.setText(_translate("MainWindow", "Analyze"))
+        self.label_8.setText(_translate("MainWindow", "Showing Results"))
+        self.btnFinish_2.setText(_translate("MainWindow", "Finish"))
         self.btn_message.setText(_translate("MainWindow", "Message"))
         self.btn_print.setText(_translate("MainWindow", "Print"))
         self.btn_logout.setText(_translate("MainWindow", "Logout"))

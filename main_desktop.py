@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import (
     QMessageBox,
     QMainWindow,
     QFileDialog,
-    QListWidget,
 )
 import os
 import sys
@@ -20,7 +19,12 @@ from text_processing import preprocess_text
 from transformers import DistilBertTokenizer, DistilBertModel
 import torch
 import numpy as np
+from gensim.models.doc2vec import Doc2Vec
 from sklearn.metrics.pairwise import cosine_similarity
+from numpy.linalg import norm
+from PyQt5.QtGui import QPixmap
+import plotly.graph_objects as go
+import plotly.io as pio
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -30,9 +34,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Initialize the DistilBERT tokenizer and model
         print("Initializing DistilBERT tokenizer and model with caching...")
-        self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
-        self.model = DistilBertModel.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
+        # self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
+        # self.model = DistilBertModel.from_pretrained('distilbert-base-uncased', cache_dir=cache_dir)
         # Set up the user interface from the generated class
+
+        self.modelTrained = Doc2Vec.load('cv_job_maching.model')
+
         self.setupUi(self)
         from modules.ui_functions import UIFunctions
         self.set_buttons_cursor()
@@ -51,21 +58,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.menu_buttons = [
         self.btnHome,  # Replace with your actual button objects
+        self.btnSingle,  # Replace with your actual button objects
     ]
 
         # Assign menu button clicks
         self.btnHome.clicked.connect(self.show_home_page)
+        self.btnSingle.clicked.connect(self.show_single_page)
 
         self.btnNext.clicked.connect(self.handle_next_button_click)
+        self.btnNext_2.clicked.connect(self.handle_next_button_click_2)
+
+        
         self.btnUpload.clicked.connect(self.handle_upload_button_click)
+        self.btnUpload_2.clicked.connect(self.handle_upload_button_click_2)
+
+
         self.btnAnalyze.clicked.connect(self.start_nlp_process)
+        self.btnAnalyze_2.clicked.connect(self.start_nlp_process_2)
+
         self.btnFinish.clicked.connect(self.handle_finish_button_click)
+        self.btnFinish_2.clicked.connect(self.handle_finish_button_click_2)
 
 
         self.saved_job_description=''
+        self.saved_job_description_2=''
         self.default_resume_count=3
         self.num_resumes=0
         self.saved_resumes={}
+        self.input_resume=''
 
 
     def init_pages(self):
@@ -76,6 +96,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def show_home_page(self):
         self.handleMenuClick(self.btnHome, 0)
+    def show_single_page(self):
+        self.handleMenuClick(self.btnSingle, 3)
     
     
     def handle_next_button_click(self):
@@ -95,6 +117,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             QMessageBox.critical(self, "Error", f"An unexpected error occurred: {str(e)}")
 
 
+    def handle_next_button_click_2(self):
+        try:
+            job_description_text = self.jobDescription_2.toPlainText()
+
+            # Check the length of the job description
+            word_count = len(job_description_text.split())
+            if word_count < 30 or word_count > 2500:
+                QMessageBox.warning(self, "Error", "The job description you entered is too short. Please make sure you paste in a job description that's at least 30 words and a maximum of 2500 words.")
+            else:
+                # Save the text if conditions are satisfied
+                self.saved_job_description_2 = job_description_text
+                # Switch to the next stack widget page
+                self.stackedWidget.setCurrentIndex(4)  # Assuming page 2 is index 1
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An unexpected error occurred: {str(e)}")
+
     def handle_upload_button_click(self):
         try:
             options = QFileDialog.Options()
@@ -113,9 +151,45 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An unexpected error occurred: {str(e)}")
 
+    def handle_upload_button_click_2(self):
+        try:
+            options = QFileDialog.Options()
+            options |= QFileDialog.ReadOnly
+            file_filter = "PDF Files (*.pdf);;DOCX Files (*.docx);;Text Files (*.txt)"
+            
+            # Change to getOpenFileName for selecting a single file
+            file, _ = QFileDialog.getOpenFileName(self, "Select File", "", file_filter, options=options)
+            
+            if file:
+                # Save or process the selected file
+                self.process_selected_file_2(file)
+            else:
+                QMessageBox.warning(self, "Warning", "No file selected.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An unexpected error occurred: {str(e)}")
 
-    
+    def process_selected_file_2(self, file):
+        """Handles processing of the selected file."""   
+     
+        try:
+            # Process the selected file based on its extension
+            if file.endswith('.pdf'):
+                text = self.extract_text_from_pdf(file)
+            elif file.endswith('.docx'):
+                text = self.extract_text_from_docx(file)
+            elif file.endswith('.txt'):
+                text = self.extract_text_from_txt(file)
+            else:
+                raise ValueError(f"Unsupported file type: {file}")
+            self.lbFilesSelected_2.setText(f"Files Selected: Successfully")
 
+
+            # Store the resume text (for NLP processing or other use)
+            self.input_resume = text
+            
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"Failed to process file {file}: {str(e)}")
+            print(f"Error processing file {file}: {str(e)}")
     def process_selected_files(self, files):
         """Handles processing of the selected files."""
         self.selected_files_count = len(files)
@@ -156,6 +230,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         except ValueError:
             QMessageBox.warning(self, "Error", "Invalid number entered for minimum resumes. Please enter a valid integer.")
 
+    def start_nlp_process_2(self):
+        """Starts the NLP process on the selected resumes."""
+        if not self.input_resume:
+            QMessageBox.warning(self, "Warning", "No files selected to analyze.")
+            return
+
+        try:
+            self.stackedWidget.setCurrentIndex(5)
+            self.analyze_resumes_for_nlp_2()
+        except ValueError:
+            QMessageBox.warning(self, "Error", "Invalid number entered for minimum resumes. Please enter a valid integer.")
+
     def analyze_resumes_for_nlp(self):
         """Start NLP processing in a background thread."""
         try:
@@ -174,6 +260,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An error occurred while starting NLP processing: {str(e)}")
+            print(f"An error occurred: {str(e)}")
+    def analyze_resumes_for_nlp_2(self):
+            """Start NLP processing in a background thread."""
+            try:
+                self.single_resume_worker = SingleResumeWorker(self.input_resume, self.saved_job_description_2, self.modelTrained)
+                self.single_resume_worker.update_label.connect(self.label_5.setText)
+                self.single_resume_worker.update_similarity_result.connect(self.display_similarity_result)
+
+                # Start the thread for single resume
+                self.single_resume_worker.start()
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"An error occurred while starting NLP processing: {str(e)}")
+                print(f"An error occurred: {str(e)}")
+
+    def display_similarity_result(self, similarity_score):
+        """Displays the similarity score of a single resume compared to the job description."""
+        try:
+            self.txtSingleResult.setText(f"Similarity Score: {similarity_score}%")
+            self.plot_gauge_in_label(similarity_score)
+
+            print(f"Similarity Score: {similarity_score}%")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An error occurred while displaying similarity: {str(e)}")
             print(f"An error occurred: {str(e)}")
 
     def display_nlp_results(self, results):
@@ -209,6 +319,44 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Clear the job description text
         self.jobDescription.clear()
+    def handle_finish_button_click_2(self):
+            # Change to the first page of the stack widget
+            self.stackedWidget.setCurrentIndex(3)
+
+            # Clear the job description text
+            self.jobDescription_2.clear()
+
+    def plot_gauge_in_label(self, similarity):
+        # Create the Plotly gauge figure
+        fig = go.Figure(go.Indicator(
+            domain = {'x': [0, 1], 'y': [0, 1]},
+            value = similarity,
+            mode = "gauge+number",
+            title = {'text': "Matching percentage (%)"},
+            gauge = {
+                'axis': {'range': [0, 100]},
+                'steps' : [
+                    {'range': [0, 50], 'color': "#FFB6C1"},
+                    {'range': [50, 70], 'color': "#FFFFE0"},
+                    {'range': [70, 100], 'color': "#90EE90"}
+                ],
+                'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 100}}))
+
+        fig.update_layout(width=600, height=400)  # Adjust the width and height as desired
+
+        # Save the figure as an image
+        try:
+            image_path = 'gauge_plot.png'  # Set the desired file path and format (e.g., .png, .jpg)
+            fig.write_image(image_path)
+            print(f"Plot saved successfully as {image_path}")
+            pixmap = QPixmap('gauge_plot.png')
+            # Display the pixmap in the label (QLabel)
+            self.lblGraph.setPixmap(pixmap)
+        except Exception as e:
+            print(f"Error saving plot: {e}")
+
+
+    
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls():
             event.accept()
@@ -321,6 +469,32 @@ class NLPWorker(QThread):
         except Exception as e:
             self.update_label.emit(f"An error occurred: {str(e)}")
             print(f"An error occurred: {str(e)}")
+class SingleResumeWorker(QThread):
+    update_label = pyqtSignal(str)
+    update_similarity_result = pyqtSignal(float)
+
+    def __init__(self, input_resume, input_job_desc, model, parent=None):
+        super().__init__(parent)
+        self.input_resume = input_resume
+        self.input_job_desc = input_job_desc
+        self.model = model
+
+    def run(self):
+        try:
+            # Preprocess and infer vectors for both resume and job description
+            v1 = self.model.infer_vector(self.input_resume.split())
+            v2 = self.model.infer_vector(self.input_job_desc.split())
+            
+            # Calculate similarity
+            similarity = 100 * (np.dot(np.array(v1), np.array(v2))) / (norm(np.array(v1)) * norm(np.array(v2)))
+            similarity_rounded = round(similarity, 2)
+
+            # Emit the result
+            self.update_similarity_result.emit(similarity_rounded)
+        
+        except Exception as e:
+            self.update_label.emit(f"Error: {str(e)}")
+            print(f"Error: {str(e)}")
 
 
 if __name__ == "__main__":
