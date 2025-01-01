@@ -247,7 +247,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """Start NLP processing in a background thread."""
         try:
             # Create the NLPWorker thread
-            self.nlp_worker = NLPWorker(self.saved_resumes, self.saved_job_description, self.tokenizer, self.model, self.default_resume_count)
+            self.nlp_worker = NLPWorker(self.saved_resumes, self.saved_job_description, self.tokenizer, self.model, self.num_resumes)
 
             # Connect signals for UI updates
             self.nlp_worker.update_label.connect(self.label_5.setText)
